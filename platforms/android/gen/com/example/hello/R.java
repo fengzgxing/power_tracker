@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.cnksi.powertracker;
+package com.example.hello;
 
 public final class R {
     public static final class attr {

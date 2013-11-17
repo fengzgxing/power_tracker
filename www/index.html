@@ -24,14 +24,35 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="js/jqm/jquery.mobile-1.3.2.min.css" /> 
+        <script type="text/javascript" src="js/jqm/jquery-1.9.1.min.js"></script>
+         <script type="text/javascript" src="js/jqm/jquery.mobile-1.3.2.min.js"></script>
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+        <!-- Home -->
+        <div data-role="page" id="page1">
+            <div data-theme="b" data-role="header">
+                <h3 id="txtTitle" class="cls_title">
+                    电站巡检系统
+                </h3>
+            </div>
+            <div data-role="content">
+                <form action="">
+                    <div data-role="fieldcontain">
+                        <label for="textinput1">
+                            登陆账号
+                        </label>
+                        <input name="" id="textinput1" placeholder="" value="" type="text">
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="textinput2">
+                            登陆密码
+                        </label>
+                        <input name="" id="textinput2" placeholder="" value="" type="text">
+                    </div>
+                    <input type="submit" data-theme="e" value="登陆系统">
+                </form>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
