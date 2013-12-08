@@ -1,0 +1,111 @@
+@charset "utf-8";
+   /*首页*/
+
+.ui-btn-corner-all{
+	   border-top-left-radius: 0.6em;
+       border-top-right-radius: 0.6em;
+       border-bottom-right-radius: 0.6em;
+       border-bottom-left-radius: 0.6em;}
+.ui-btn-inner .ui-btn-text{ 
+        text-shadow:0 1px 1px #CCC;
+		font-family:"微软雅黑"；
+		font-size:18px;
+       }
+.ui-btn-up-e{background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffe332), to(#ffa105));}
+.ui-btn .ui-btn-up-e:hover{background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffa105), to(#ffe332));}
+   #page1{
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#0074d9), to(#02449b));
+}
+
+#shuru{ margin:0px auto;}
+#txt p{
+	text-align:center;
+	font-size:2.5em;
+	color:#FFF;
+	font-family:"微软雅黑";
+	letter-spacing:0.4em;
+	margin-bottom:2em;}
+#user_txt,#password_txt{ 
+margin: 0 0 10px 0px;
+color: #FFF;
+font-size: 1.1em;
+font-family: "微软雅黑";
+line-height: 1.4;}
+
+#daohangnav{
+	}
+#dl{margin:3em 0 4em 0;
+color:#FFF;
+font-family:"微软雅黑";
+letter-spacing:0.4em;
+font-size:1.5em;}
+#sysc:hover{
+	background:-webkit-gradient(linear, 0 0, 0 100%, from(#beecff), to(#65d1fd));}
+#sysc{
+	color:#3e4145;}
+#nav{
+	border-radius:10px;
+	text-align:center;}
+#nav ul{border-radius:10px;}
+#nav ul li a:hover{
+	background:-webkit-gradient(linear, 0 0, 0 100%, from(#bfedff), to(#62d0fd));}
+
+#page_bg{
+	background:#e5ecf2;}
+    /*记录缺陷*/
+
+#hd{background: -webkit-gradient(linear, 0 0, 0 100%, from(#0177de), to(#0051ab));}
+#anniu{background: -webkit-gradient(linear,0 0, 0 100%, from(#74cb0e),to(#3a8a02)); }
+.ui-collapsible-heading .ui-btn:hover{background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffe332), to(#ffa105));}
+.ui-btn-up-d{ background:-webkit-gradient(linear, 0 0, 0 100%, from(#cbd9e5), to(#74b4f6)); text-shadow:1px 1px #FFFFFF;}
+.ui-collapsible-heading .ui-btn-up-d .ui-btn-text{ color:#565347;}
+.ui-block-a #xj{ border-radius:0.6em; background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffe332), to(#ffa105)); border:1px solid #dfa710; width:50px; height:40px; cursor:pointer;}
+.ui-block-a #xj img{ position:relative; margin:6px 0 0 8px;}
+#anniu .ui-btn-inner .ui-btn-text{text-shadow:1px 1px 0 #000;}
+	
+	/*请扫描巡视点标签*/
+#sm .ui-btn-inner .ui-btn-text{ text-shadow:1px 1px 0 #333;}
+#sm{
+	box-shadow:none;
+	border:1px solid #388602;
+	margin:10em 0 5em 0;
+	background: -webkit-gradient(linear,0 0, 0 100%, from(#9edb56),to(#388602));}
+#smsm{
+	box-shadow:none;
+	border:1px solid #7babdc;
+	margin:10em 0 5em 0;
+	background: -webkit-gradient(linear,0 0, 0 100%, from(#dbedfd),to(#8fc2f2));}
+#anniu{background: -webkit-gradient(linear,0 0, 0 100%, from(#74cb0e),to(#3a8a02));}
+
+    /*001号巡视点*/
+
+#hd{
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#0177de), to(#0051ab));}
+#xs ul li{ background:-webkit-gradient(linear, 0 0, 0 100%, from(#e2ebf3), to(#cfdeeb));}
+#xs ul li:hover{ background:-webkit-gradient(linear, 0 0, 0 100%, from(#d5e0e9), to(#cfdae3));}
+#fanhui{background: -webkit-gradient(linear, 0 0, 0 100%, from(#0177de), to(#0051ab));
+margin:0 0 0 0.5%;}
+
+   /*1F机巡视内容*/
+.ui-btn-text .ui-link-inherit{ text-shadow:1px 1px 0 #ffffff;}
+#lb_bg:hover{background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffe332), to(#ffa105));}
+#lb_bg{background:-webkit-gradient(linear, 0 0, 0 100%, from(#e2ebf3), to(#cfdeeb));}
+#shuoming1{color: #F00;
+letter-spacing: 3px;
+font-size: 16px;
+width: auto;
+height: 16px;
+margin: -30px 0 0 0;
+z-index: 9999;
+right: 40px;
+position: absolute;}
+#shuoming{color:#FFF; background:#F00; font-size:14px; font-weight:normal; width:30px;font-family:"微软雅黑"; text-align:center;}
+#lb_bg{ background:-webkit-gradient(linear, 0 0, 0 100%, from(#e1ebf3), to(#d0deeb))}
+.ui-collapsible-heading .ui-btn-up-b{background: -webkit-gradient(linear, 0 0, 0 100%, from(#0177df), to(#0056b1));}
+.ui-collapsible-heading .ui-btn-up-b .ui-btn-text{ color:#ffffff; text-shadow:1px 1px 1px #333333;}
+/*巡检列表*/
+#lb ul li:hover{ background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffda4f), to(#ffbe1d));}
+#xj{
+	width:20px;
+	height:25px;
+	}
