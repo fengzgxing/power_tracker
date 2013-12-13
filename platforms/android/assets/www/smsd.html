@@ -9,30 +9,38 @@
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 <script type="text/javascript" src="js/js.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/js.url.js" charset="utf-8"></script>
-<title>1F机巡视内容</title>
+<title>请扫描巡视点标签</title>
 <script type="text/javascript">
-	var iiid = $.getUrlVar('xsnrid');
-	db.transaction(function(tx){xsnrDB(tx,"card_content_ref",iiid)}, errorCB);
- 
+function barcode(){
+	var psid = $.getUrlVar('id');
+	db.transaction(function(tx){querybarcodeDB(tx,"inspection_point",psid)}, errorCB);
+	//db.transaction(querybarcodeDB, errorCB);
+}
 </script>
 </head>
 
 <body>
-<div data-role="page" id="page_bg">
-  <div data-theme="a" data-role="header" data-position="fixed" id="hd">
-   <a data-role="button" href="#" onclick="javascript:history.back(1);" data-icon="back" target="_blank" id="fanhui">
+<div data-role="page"  id="page_bg" >
+    <div data-theme="a" data-role="header" data-position="fixed"  data-icon="back" data-iconpos="left"  id="hd">
+     <a data-role="button" href="#page1" data-icon="back" id="fanhui">
             返回
         </a>
-        <span class="ui-title" id="btnSync">
-        1F机巡视内容
+        <span class="ui-title">
+        请扫描巡视点标签
         </span>
     </div>
-    <br /><br />
-    
-    <div data-role="content" id="xsnrv"> 
-             
+    <div data-role="content">
+        <div id="tp">
+            <img src="images/icon_.png" alt="image" id="btnSync">
+        </div>
+        <a data-role="button" data-theme="b" href="#" onclick="barcode()" id="sm">
+            扫描
+        </a>
+        <a data-role="button" data-theme="c" href="#page1" data-iconpos="left" data-icon="info" id="smsm">
+            扫描说明
+        </a>
     </div>
 </div>
-</div>
+
 </body>
 </html>
