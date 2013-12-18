@@ -1,10 +1,11 @@
+<!---  标签扫描界面 --->
 
 <div data-role="page"  id="page_scan" >
     <script type="text/javascript">
         $("#sm").bind("click",function(){scan.startScan();});
     </script>
-    <div data-theme="a" data-role="header" data-position="fixed"  data-icon="back" data-iconpos="left"  id="hd">
-     <a data-role="button" href="xunjianliebiao.html" data-icon="back" id="fanhui">
+    <div data-theme="b" data-role="header" data-position="fixed"  data-icon="back" data-iconpos="left">
+     <a data-role="button" href="2.html" data-icon="back">
             返回
         </a>
         <span class="ui-title">
@@ -12,16 +13,14 @@
         </span>
     </div>
     <div data-role="content">
-        <div style="width:100%; height:400px; position: relative;"
+        <div style="width:100%; height:300px; position: relative;"
         data-controltype="image">
-            <img src="images/icon_scan.png" alt="image" style="position: relative; top: 10%; left: 36%; margin-left: -16px; margin-top: 0px">
+            <img src="images/icon_scan.png" alt="image" style="position: relative; top: 10%; left: 36%; margin-left: -16px; margin-top: 20px">
         </div>
         <a data-role="button" data-theme="b" href="#" id="sm">
-            扫描
+            扫描射频标签
         </a>
-        <a data-role="button" data-theme="c" href="#page_xunjianliebiao" data-iconpos="left" data-icon="info" id="smsm">
-            扫描说明
-        </a>
+        
     </div>
 </div>
 

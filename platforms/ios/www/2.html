@@ -1,16 +1,16 @@
-
- <div data-role="page" id="page_xunjianliebiao" >
+<!-- 巡视列表界面 -->
+ <div data-role="page" id="page2" >
     <script type="text/javascript">
-        $('#page_xunjianliebiao').bind('pageinit',xunjianliebiao.pageInit);
-        $("#title").html(localStorage._deptname+'-巡视卡');
+        $('#page2').bind('pageinit',cardlist.pageInit);
+        
     </script>
-    <div data-theme="b" data-role="header" data-position="fixed" id="hd">
-        <span class="ui-title" id="title">
+    <div data-theme="b" data-role="header" data-position="fixed">
+        <span class="ui-title" id="page2_title">
         
         </span>
     </div>
-    <div data-role="content" id="lb">
-        <ul data-role="listview" data-divider-theme="b" id="cardlist">
+    <div data-role="content">
+        <ul data-role="listview" data-divider-theme="b" data-inset="true" id="cardlist">
              
         </ul>
     </div>

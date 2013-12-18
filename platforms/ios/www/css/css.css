@@ -199,21 +199,24 @@
 	text-shadow: 1px 1px 1px #333;
 }
 /*1F机巡视内容*/
-#yongdxt{ margin-bottom:20px;}
-#bi{ margin-bottom:-10px;}
-#xunshi{ z-index:9999;}
-#bi li:last-child{border-radius: 0 0 0.6em 0.6em;}
+.yongdxt{ margin-bottom:20px;}
+.bi{ margin-bottom:-10px;}
+.xunshi{ z-index:9999;}
+.bi li:last-child{border-radius: 0 0 0.6em 0.6em;}
 #xjnr .ui-listview{ margin:-16px -16px -11px -16px;}
 .ui-btn-up-c:visited, .ui-btn-up-c a.ui-link-inherit{ color:#000;}
 .ui-btn-text .ui-link-inherit {
 	text-shadow: 1px 1px 0 #ffffff;
 }
-#lb_bg:hover {
+lb_bg:hover {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffe332), to(#ffa105));
 	
 }
+ 
+
 li.lb_bg a:hover{ color:#000;}
 li.lb_bg {
+    text-indent:20px;
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#e2ebf3), to(#cfdeeb));
 }
 .shuoming1 {
@@ -236,7 +239,7 @@ li.lb_bg {
 	font-family: "微软雅黑";
 	text-align: center;
 }
-#lb_bg {
+lb_bg {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#e1ebf3), to(#d0deeb))
 }
 .ui-collapsible-heading .ui-btn-up-b {
@@ -279,5 +282,17 @@ li.lb_bg {
 }
 .ui-bar-b {
 	text-shadow: 0 1px 0 #04070A;
+}
+
+.queding .ui-btn-inner .ui-btn-text{
+    text-shadow:1px 1px 0 #000;
+}
+.queding:hover{
+    background:-webkit-gradient(linear,0,0,0 100%,from(#004fa8),to(#0177df));
+}
+.queding{
+    letter-spacing:5px;
+    height:47px;
+    background:-webkit-gradient(linear,0,0,0 100%,from(#0177df),to(#004fa8));
 }
  
