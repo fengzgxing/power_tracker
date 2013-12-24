@@ -41,17 +41,19 @@ var devicepartlist_of_device={
                 innerhtml = innerhtml+devicepartlist_of_device.getLiHtml(__content);
             }
             //innerhtml = innerhtml+'<li data-icon="false">  <a href="#" data-role="button" data-theme="e" onclick="devicepartlist_of_device.findDefectOnClick('+__dpid+',\''+__dpname+'\')">记录缺陷</a>  </li>';
-            $('#contentlist').html(innerhtml);
+            $('#contentlist').html(innerhtml).trigger('create');
             $('#contentlist').listview("refresh");
         }else{
             kmsg('数据库中无详细的设备数据，请在后台配置');
         }
     },
     getLiHtml:function(content){
-        return '<li data-theme="c" data-icon="false"><a href="#" data-transition="slide">'+content+'</a> </li>';
+        //return '<li data-theme="c" data-icon="false"><a href="#" data-transition="slide">'+content+'</a> </li>';
+        return '<div class="qx_shuru"><input type="text" size=4 /></div><li data-theme="c" class="lb_bg" data-icon="false"><a href="#" data-transition="slide">'+content+'</a></li>';
     },
     getLiDividerHtml:function(dpid,dpname,dcount){
-        return '<li data-role="list-divider" role="heading" style="padding:15px;font-size:18px;">'+dpname+'<a href="#" onclick="devicepartlist_of_device.findDefectOnClick('+dpid+',\''+dpname+'\')">记录缺陷</a> <span class="ui-li-count">'+dcount+'</span></li>';
+        //return '<li data-role="list-divider" role="heading" style="padding:15px;font-size:18px;">'+dpname+'<a href="#" onclick="devicepartlist_of_device.findDefectOnClick('+dpid+',\''+dpname+'\')">记录缺陷</a> <span class="ui-li-count">'+dcount+'</span></li>';
+        return '<li data-role="list-divider" role="heading" class="xunshi">'+dpname+'<div class="jl"><a href="#" data-role="button" class="jl_quexian" onclick="devicepartlist_of_device.findDefectOnClick('+dpid+',\''+dpname+'\')">记录缺陷</a></div><span class="ui-li-count jsp">'+dcount+'</span></li>';
     },
     findDefectOnClick:function(dpid,dpname){
         localStorage._dpid = dpid;

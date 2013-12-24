@@ -1,21 +1,23 @@
-
+   
 <div data-role="page" id="page_devicepartlist">
   <script type="text/javascript">
     $('#page_devicepartlist').bind('pageinit',devicepartlist_of_device.pageInit);
          
   </script>
-  <div data-theme="b" data-role="header" data-position="fixed">
-        <a data-role="button" href="4.html" data-icon="back">返回</a>
+  <div data-theme="a" data-role="header" data-position="fixed" id="hd">
+   <a data-role="button" href="4.html" data-icon="back" class="fanhui">
+            返回
+        </a>
         <span class="ui-title" id="page_devicepartlist_title"></span>
     </div>
-    
     <div data-role="content">
-        <ul data-role="listview" data-divider-theme="b" data-inset="true" id="contentlist">
+        <ul data-role="listview"  data-inset="true" id="contentlist">
             
         </ul>
     </div>
-    <div data-role="footer" data-position="fixed" data-theme="b" class="ui-bar" style="text-align:center;">
-        <a href="#">完成</a>
+
+    <div data-theme="a" data-role="footer" data-position="fixed" class="foot">
+        <a href="#" data-role="button" class="footer_wcxj">完成巡检</a>
     </div>
     
 </div>
