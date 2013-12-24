@@ -29,14 +29,19 @@
 	text-shadow: 1px 1px 1px #FFFFFF;
 	font-size: 21px;
 }
+
+#btnLogin{
+    height:40px;
+}
 .ui-btn-corner-all {
 	border-top-left-radius: 0.6em;
 	border-top-right-radius: 0.6em;
 	border-bottom-right-radius: 0.6em;
 	border-bottom-left-radius: 0.6em;
 }
+
 .ui-btn-inner .ui-btn-text {
- font-family:"微软雅黑"； font-size:18px;
+ font-family:"微软雅黑";font-size:18px;
 }
 .ui-btn-up-e {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffe332), to(#ffa105));
@@ -44,10 +49,12 @@
 .ui-btn .ui-btn-up-e:hover {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffa105), to(#ffe332));
 }
+
 #page1 {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#0074d9), to(#02449b));
 }
-#txt p {
+
+.txt p {
 	text-align: center;
 	font-size: 2.5em;
 	color: #FFF;
@@ -57,7 +64,7 @@
 	margin-bottom: 1.5em;
 	text-shadow: none;
 }
-#user_txt, #password_txt {
+.txt {
 	margin: 0 0 20px 0px;
 	color: #FFF;
 	font-size: 1.1em;
@@ -114,7 +121,8 @@
 #hd {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#0177de), to(#0051ab));
 }
-#anniu {
+
+.anniu {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#74cb0e), to(#3a8a02));
 	
 }
@@ -187,17 +195,7 @@
 #xs ul li:hover {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffe332), to(#ffa105));
 }
-#fanhui {
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(#0177de), to(#0051ab));
-	margin: 0 0 0 0.5%;
-}
-#fanhui:hover {
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(#0051ab), to(#0177de));
-	margin: 0 0 0 0.5%
-}
-#fanhui .ui-btn-inner .ui-btn-text {
-	text-shadow: 1px 1px 1px #333;
-}
+
 /*1F机巡视内容*/
 .yongdxt{ margin-bottom:20px;}
 .bi{ margin-bottom:-10px;}
@@ -208,7 +206,7 @@
 .ui-btn-text .ui-link-inherit {
 	text-shadow: 1px 1px 0 #ffffff;
 }
-lb_bg:hover {
+.lb_bg:hover {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffe332), to(#ffa105));
 	
 }
@@ -239,8 +237,8 @@ li.lb_bg {
 	font-family: "微软雅黑";
 	text-align: center;
 }
-lb_bg {
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(#e1ebf3), to(#d0deeb))
+.lb_bg {
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#e1ebf3), to(#d0deeb)); 
 }
 .ui-collapsible-heading .ui-btn-up-b {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#0177df), to(#0056b1));
@@ -249,7 +247,7 @@ lb_bg {
 	color: #ffffff;
 }
 .qxdy {
-	width: 60px;
+	width: 200px;
 	margin-top:5px;
 	float: right;
 	position: absolute;
@@ -276,7 +274,8 @@ lb_bg {
 #lb ul li:hover {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffe332), to(#ffa105));
 }
-#xj {
+
+.xj {
 	width: 20px;
 	height: 25px;
 }
@@ -295,4 +294,52 @@ lb_bg {
     height:47px;
     background:-webkit-gradient(linear,0,0,0 100%,from(#0177df),to(#004fa8));
 }
- 
+
+/*************************************/
+/*** 返回按钮样式**/
+.cls-btn-back {
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#0177de), to(#0051ab));
+	margin: 0 0 0 0.5%;
+}
+.cls-btn-back:hover {
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#0051ab), to(#0177de));
+	margin: 0 0 0 0.5%
+}
+.cls-btn-back .ui-btn-inner .ui-btn-text {
+	text-shadow: 1px 1px 1px #333;
+}
+
+.dd{
+font-size:12px;
+}
+
+#div_data_sync{
+    clear:both;
+    padding-left:18px;
+    margin-top:40px;
+    text-align:center;
+}
+.bgBar{
+    background: #FFFFFF;
+    font-family: Arial,Verdana;
+    border: 1px solid #4196F1;
+    font-size: 17;
+    font-weight: bold;
+
+}
+
+.bgBar div{
+    background: #ffe332;
+    border: 1px solid #FFFFFF;
+    color:  #308040;
+    text-align: right;
+    overflow: hidden;
+}
+
+.bgBar label{
+    font-size:12px;
+}
+
+.ui-header{
+    padding-bottom:6px;
+}

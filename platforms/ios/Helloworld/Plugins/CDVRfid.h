@@ -11,6 +11,6 @@
 
 @interface CDVRfid : CDVPlugin<RcpDelegate>
 
-- (void)echo:(CDVInvokedUrlCommand*) command;
+- (void)readRfid:(CDVInvokedUrlCommand*) command;
 
 @end

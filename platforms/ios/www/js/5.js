@@ -5,61 +5,57 @@ var queryDevicePartSql = "select * from device_part where dpid in ( select disti
 var queryContentSql = "select * from inspection_content where icid in ( select distinct(icid) from card_content_ref where iiid=? and dpid = ?)";
 
 
+//查询各个设备部件的缺陷数量
+var _queryDevicePartDefectCountSql = "select dp.name,dp.dpid,dr.irchunk,count(1) as dcount from device_part dp left join defect_record dr on dp.dpid = dr.dpid where dp.dpid in(select dpid from card_content_ref where iiid = ? and did = ?) group by dp.dpid ";
+var queryInspectionContentSql = "select ic.*,_tmp.* from ("+_queryDevicePartDefectCountSql+") as _tmp left join inspection_content ic on ic.dpid = _tmp.dpid where ic.icid in (select icid from card_content_ref where iiid = ? and did = ?)"
+
 var devicepartlist_of_device={
     
     pageInit:function(){
-        $('#page_devicepartlist_title').html(localStorage._dname+' - 具体巡视设备列表');
-        executeQuery(queryDevicePartSql,[localStorage._iiid,localStorage._did],devicepartlist_of_device.dealQueryDevicePartSql);
+        $('#page_devicepartlist_title').html(localStorage._dname+' - 巡视内容');
+        executeQuery(queryInspectionContentSql,[localStorage._iiid,localStorage._did,localStorage._iiid,localStorage._did],devicepartlist_of_device.dealQueryInspectionContentSql);
     },
-    dealQueryDevicePartSql:function(tx,results){
+    dealQueryInspectionContentSql:function(tx,results){
         var lens = results.rows.length;
         if(lens>0){
             var innerhtml ="";
+            var temp_dpname = "";
             for(var i=0;i<lens;i++){
-                innerhtml = innerhtml+devicepartlist_of_device.getDivHtml(results.rows.item(i).dpid,results.rows.item(i).name);
+                var __icid = results.rows.item(i).icid;
+                var __dpid = results.rows.item(i).dpid;
+                var __content = results.rows.item(i).content;
+                var __dpname = results.rows.item(i).name;
+                var __dcount  = results.rows.item(i).dcount;
+                var __irchunk = results.rows.item(i).irchunk;
+                
+                if(!__irchunk && __dcount==1){
+                    __dcount = 0;
+                }
+                if(__dpname !=temp_dpname){
+//                    if(temp_dpname.length>0){
+//                        innerhtml = innerhtml+'<li data-icon="false">  <a href="#" data-role="button" data-theme="e" onclick="devicepartlist_of_device.findDefectOnClick('+__dpid+',\''+__dpname+'\')">记录缺陷</a> </li>';
+//                    }
+                    innerhtml = innerhtml+devicepartlist_of_device.getLiDividerHtml(__dpid,__dpname,__dcount);
+                    temp_dpname = __dpname;
+                }
+                innerhtml = innerhtml+devicepartlist_of_device.getLiHtml(__content);
             }
-            innerhtml = innerhtml+'<a href="javascript:;" data-theme="b" data-role="button" class="queding">确定</a>';
-            $('#devicepartlist').append(innerhtml).trigger("create");
+            //innerhtml = innerhtml+'<li data-icon="false">  <a href="#" data-role="button" data-theme="e" onclick="devicepartlist_of_device.findDefectOnClick('+__dpid+',\''+__dpname+'\')">记录缺陷</a>  </li>';
+            $('#contentlist').html(innerhtml);
+            $('#contentlist').listview("refresh");
         }else{
-            navigator.notification.alert('数据库中无详细的设备数据，请在后台配置',null,'信息提示','确定');
+            kmsg('数据库中无详细的设备数据，请在后台配置');
         }
     },
-    h3ItemOnClick:function(dpid){
+    getLiHtml:function(content){
+        return '<li data-theme="c" data-icon="false"><a href="#" data-transition="slide">'+content+'</a> </li>';
+    },
+    getLiDividerHtml:function(dpid,dpname,dcount){
+        return '<li data-role="list-divider" role="heading" style="padding:15px;font-size:18px;">'+dpname+'<a href="#" onclick="devicepartlist_of_device.findDefectOnClick('+dpid+',\''+dpname+'\')">记录缺陷</a> <span class="ui-li-count">'+dcount+'</span></li>';
+    },
+    findDefectOnClick:function(dpid,dpname){
         localStorage._dpid = dpid;
-        executeQuery(queryContentSql,[localStorage._iiid,localStorage._dpid],devicepartlist_of_device.dealQueryContentSql);
-    },
-    dealQueryContentSql:function(tx,results){
-        var lens = results.rows.length;
-        if(lens>0){
-            var innerhtml ="";
-            for(var i=0;i<lens;i++){
-                innerhtml = innerhtml+devicepartlist_of_device.getLiHtml(results.rows.item(i).icid,results.rows.item(i).content,results.rows.item(i).result_type);
-            }
-            $('#dpcontent'+localStorage._dpid ).html(innerhtml);
-            $('#dpcontent'+localStorage._dpid ).listview('refresh');
-        }else{
-            navigator.notification.alert('数据库中无详细的巡视标准，请在后台配置',null,'信息提示','确定');
-        }
-    },
-    contentItemOnClick:function(icid,){
-        
-    },
-    getDivHtml:function(dpid,dpname){
-        var html='<div data-role="collapsible" data-theme="b" data-collapsed="true" data-content-theme="c" data-collapsed-icon="true" class="yongdxt">';
-        html = html +'<h3 class="xunshi" onclick="devicepartlist_of_device.h3ItemOnClick('+dpid+')">';
-        html = html + dpname;
-        html = html+'</h3>';
-        html = html +'<ul data-role="listview" data-inset="false" data-theme="c" class="bi" id="dpcontent'+dpid+'">';
-        html = html + '</ul></div>';
-        return html;
-    },
-    getLiHtml:function(icid,content,result_type){
-        var li = '<li class="lb_bg"><a href="#" data-rel="dialog" onclick="devicepartlist_of_device.contentItemOnClick('+icid+','+content+')">'+content+'</a>';
-        if(result_type != 'Y'){
-            li = li + '<p class="shuoming1"></p></li>';
-        }else{
-            li = '<li class="lb_bg"> <div class="qxdy" style="margin-right:30px;"> <input type="text" value="" style="width:60px;height:24px;font-size:14px; margin-left:10px;">mA</div> <a href=”#“ >'+content+'</a> </li>';
-        }
-        return li;
+        localStorage._dpname = dpname;
+        $.mobile.changePage("6.html","slidedown",true,true);
     }
 }

@@ -1,70 +1,27 @@
 
 <div data-role="page" data-control-title="Home" id="page_defect_list">
+    <script type="text/javascript">
+        $("#page_defect_list").bind("pageinit",defect_list.pageInit);
+       
+    </script>
     <div data-theme="b" data-role="header" data-position="fixed">
         <a data-role="button" href="5.html" data-icon="back">
             返回
         </a>
         <span class="ui-title" id="page_defect_list_title">
-         记录缺陷
+          
         </span>
     </div>
     <div data-role="content">
-        <div data-role="collapsible" data-theme="d" data-collapsed="false" data-content-theme="d"  data-collapsed-icon="false">
-       
-			<h4>
-				引线有散股现象	
-			</h4>
-			<div class="ui-grid-c">
-				<div class="ui-block-a"><p id="xj"><img src="images/icon_camera.png" /></p></div>
-				<div class="ui-block-b"></div>
-			</div>
-		</div>
+        <div id="colla">
+        </div>
         
-        <div data-role="collapsible" data-theme="d" data-content-theme="d"  data-collapsed-icon="false" id="jq_bg">
-			<h4>
-               引线截面损失低于7％
-			</h4>
-			<div class="ui-grid-c">
-				<div class="ui-block-b"></div>
-				<div class="ui-block-c"></div>
-			</div>
-		</div>
-        
-        <div data-role="collapsible" data-theme="d"  data-content-theme="d"  data-collapsed-icon="false" >
-			<h4>
-            截面损失达7％以上， 但小于25％
-			</h4>
-			<div class="ui-grid-c">
-				<div class="ui-block-a"></div>
-				<div class="ui-block-b"></div>
-			</div>
-		</div>
-    
-    
-    <div data-role="collapsible" data-theme="d" data-content-theme="d"  data-collapsed-icon="false" >
-			<h4>
-					引线表面有电晕、毛刺、轻微损伤现象
-			</h4>
-			<div class="ui-grid-c">
-				<div class="ui-block-b"></div>
-				<div class="ui-block-c"></div>
-			</div>
-		</div>
-       
-         <div data-role="collapsible" data-theme="d" data-content-theme="d"  data-collapsed-icon="false" >
-			<h4>
-					截面损失达25％以上
-			</h4>
-			<div class="ui-grid-c">
-				<div class="ui-block-b"></div>
-				<div class="ui-block-c"></div>
-			</div>
-		</div>
         <div>
             <input name="" id="searchinput1" placeholder="自定义缺陷" value="" type="text" data-icon="">
         </div>
         <br /><br /><br />
-        <a data-role="button" data-theme="b" href="index.html" id="anniu" data-rel="back">
+        
+        <a data-role="button" data-theme="b" href="#" class="anniu" id="btnOk">
             确定
         </a>
     </div>

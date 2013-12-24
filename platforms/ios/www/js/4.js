@@ -6,7 +6,7 @@ var queryDeviceSql = "select * from device where did in (select distinct(did) fr
 var devicelist_of_point = {
     
     pageInit:function(){
-        $('#page_inspection_point_title').html(localStorage._pointname+' - 巡视点 设备列表');
+        $('#page_inspection_point_title').html(localStorage._pointname+' - 设备列表');
         executeQuery(queryDeviceSql,[localStorage._cardid,localStorage._rfidCode],devicelist_of_point.dealQueryDeviceSqlResult);
     },
     dealQueryDeviceSqlResult:function(tx,results){
@@ -21,7 +21,7 @@ var devicelist_of_point = {
              $('#devicelist').html(innerhtml);
             $("#devicelist").listview("refresh");
         }else{
-            navigator.notification.alert('数据库中无设备数据，请在后台配置',null,'信息提示','确定');
+            kmsg('数据库中无设备数据，请在后台配置');
         }
     },
     itemOnClick:function(did,dname){

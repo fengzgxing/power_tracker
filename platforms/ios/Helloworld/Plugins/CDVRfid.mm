@@ -38,23 +38,39 @@
 
 @synthesize rcp=_rcp;
 
-- (void)echo:(CDVInvokedUrlCommand *)command{
-    
+- (void)readRfid:(CDVInvokedUrlCommand *)command{
+    NSString*  action = [command.arguments objectAtIndex:0];     
     [self.commandDelegate runInBackground:^{
+        
         self.pluginResult = nil;
         self.hasRead = false;
         self.msg = @"";
         int stopTagCount = [[NSUserDefaults standardUserDefaults] integerForKey:@"stopTagCount"];
         int stopTime = [[NSUserDefaults standardUserDefaults] integerForKey:@"stopTime"];
         int stopCycle =1;// [[NSUserDefaults standardUserDefaults] integerForKey:@"stopCycle"];
-        NSLog(@"stopTagCount %d,stopTime %d,stopCycle %d",stopTagCount,stopTime,stopCycle);
-        [self.rcp startReadTags:stopTagCount mtime:stopTime repeatCycle:stopCycle];
-        [NSThread sleepForTimeInterval:1.0f];
-        if(self.rcp.isConnected){
-            self.pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.msg];
-        }else{
-            self.pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        //NSLog(@"stopTagCount %d,stopTime %d,stopCycle %d",stopTagCount,stopTime,stopCycle);
+        if(action !=nil && [@"open" isEqualToString:action]){
+            if(![self.rcp isOpened]){
+                [self.rcp open];
+            }
         }
+        if(action!=nil && [@"close" isEqualToString:action]){
+            if([self.rcp isOpened]){
+                [self.rcp close];
+            }
+        }
+        if(action!=nil && [@"read" isEqualToString:action]){
+            [self.rcp startReadTags:stopTagCount mtime:stopTime repeatCycle:stopCycle];
+        
+            [NSThread sleepForTimeInterval:1.0f];
+        
+            if(self.rcp.isConnected){
+                self.pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.msg];
+            }else{
+                self.pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+            }
+        }
+        
         [self.commandDelegate sendPluginResult:self.pluginResult callbackId:command.callbackId];
     }];
 }
@@ -68,11 +84,12 @@
     return _rcp;
 }
 
+//插件初始化
 - (void)pluginInitialize{
-       if(![self.rcp isOpened]){
-        [self.rcp open];
-    }
-    
+//    if(![self.rcp isOpened]){
+//        [self.rcp open];
+//    }
+//    
     [super pluginInitialize];
 }
 
@@ -93,11 +110,11 @@
 
 - (void)ackReceived:(uint8_t)commandCode
 {
-	//NSLog(@"ack_received [%02X]\n",commandCode);
+	NSLog(@"ack_received [%02X]\n",commandCode);
 }
 
 - (void)errReceived:(uint8_t)errCode
 {
-	//NSLog(@"err_received [%02X]\n",errCode);
+	NSLog(@"err_received [%02X]\n",errCode);
 }
 @end
