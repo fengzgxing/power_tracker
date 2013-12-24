@@ -36,14 +36,14 @@ var page_point_list = {
         $.mobile.changePage("3.html","slidedown",true,true);
     },
     getLiHtml:function(iiid,point_name,barcode){
-        var li = '<li>';
+        var li = '<li data-theme="c" class="li_bg">';
         if(!barcode || barcode=='null'){
             barcode="未设定";
         }
-        li = li + '<a href="#" data-transition="slide" onclick="page_point_list.itemOnClick('+iiid+',\''+point_name+'\')")><h2>';
+        li = li + '<a href="" data-transition="slide" onclick="page_point_list.itemOnClick('+iiid+',\''+point_name+'\')")><p class="li_top">';
         li = li + point_name;
-        li = li + '</h2>';
-        li = li + '<p><strong>射频标签：'+barcode+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二&nbsp;&nbsp;维&nbsp;&nbsp;码：'+barcode+'</strong></p>';
+        li = li + '</p>';
+        li = li + '<span>射频标签：'+barcode+'</span><br /><span>二维码：'+barcode+'</span>';
         li = li + '</a></li>';
         return li;
     }   

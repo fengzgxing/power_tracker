@@ -5,23 +5,29 @@
         $("#page_scan").bind('pageinit',scan.pageInit);
         $("#scanBack").bind('click',scan.dealScanBack);
         $("#sm").bind("click",scan.startScan);
-    </script>
+        </script>
     <div data-theme="b" data-role="header" data-position="fixed"  data-icon="back" data-iconpos="left">
         <a data-role="button" href="#" data-icon="back" id="scanBack" class="cls-btn-back">返回</a>
         <span class="ui-title">请扫描巡视点标签</span>
     </div>
     <div data-role="content">
-        <div style="width:100%; height:300px; position: relative;"
-        data-controltype="image">
-            <img src="images/icon_scan.png" alt="image" style="position: relative; top: 10%; left: 36%; margin-left: -16px; margin-top: 20px">
+        <div id="tp">
+            <img src="images/icon_scan.png" alt="image">
+                </div>
+        <div class="smspbj">
+            <a data-role="button" target="_blank" data-theme="b" href="#" id="sm">
+                扫描射频标签
+            </a>
         </div>
-        <a data-role="button" data-theme="b" href="#" id="sm">
-            扫描射频标签
-        </a>
+        <div class="smewm">
+            <a data-role="button" data-theme="c" href="#" id="bar2cod">
+                扫描二维码
+            </a>
+        </div>
     </div>
-    <div data-role="footer" data-position="fixed" data-theme="a" style="text-align:right;">
-        <a href="#" data-role="button">扫描说明</a>
+    <div data-role="footer" data-position="fixed" class="foot">
+        
+        <a href="javascript:;" data-role="button" data-iconpos="left" data-icon="info" class="footer_anniu">扫描说明</a>
+        
     </div>
-
 </div>
-
