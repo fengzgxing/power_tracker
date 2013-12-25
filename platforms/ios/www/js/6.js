@@ -89,15 +89,28 @@ var defect_list = {
             defect.drchunk = drchunk;
             defectArray.push(defect);
         }
-        var collapse = imgDisplay=='none'?true:false;
-        
-        var divHtml = '<div data-role="collapsible" data-theme="d" data-collapsed="'+collapse+'" data-content-theme="d"  data-collapsed-icon="false">';
+        /*var divHtml = '<div data-role="collapsible" data-theme="d" data-collapsed="false" data-content-theme="d"  data-collapsed-icon="false">';
         divHtml = divHtml+'<h4>'+description+'</h4>';
         divHtml = divHtml+defect_list.getLevelSelect(ddid,level);
         divHtml = divHtml+'<div class="ui-grid-c" style="height:80px;">';
-        divHtml = divHtml+'<div class="ui-block-a"> <div style="float:left;padding-top:20px;" class="xj" onclick="defect_list.cameraOnClick('+ddid+',\''+description+'\');" ><img src="images/icon_camera.png" /></div>';
+        divHtml = divHtml+'<div class="ui-block-a"><a class="xj" data-role="button" onclick="defect_list.cameraOnClick('+ddid+',\''+description+'\');"><img src="images/icon_camera.png" /></a></div>';
         divHtml = divHtml+'<div style="float:left;margin-left:40px;" onclick="defect_list.showBigImg();" ><img id="defect_img'+ddid+'" src="'+imageURL+'" style="display:'+imgDisplay+';height:70px;width:85px;"/></div>';
-        divHtml = divHtml+'</div> <div class="ui-block-b"></div>';
+        divHtml = divHtml+'</div> <div class="ui-block-b"><a class="xj" data-role="button" onclick="defect_list.cameraOnClick('+ddid+',\''+description+'\');"><img src="images/icon_camera.png" /></a><div style="float:left;margin-left:40px;" onclick="defect_list.showBigImg();" ><img id="defect_img'+ddid+'" src="'+imageURL+'" style="display:'+imgDisplay+';height:70px;width:85px;"/></div></div>';
+        divHtml = divHtml+'</div>';
+        divHtml = divHtml+'</div>';
+        //divHtml = divHtml+'</div>';*/
+        var divHtml = ' <div data-role="collapsible" data-theme="d" data-collapsed="false" data-content-theme="d" data-collapsed-icon="false">';
+        
+        divHtml = divHtml+'<h4 id="qx">';
+        divHtml = divHtml+description;
+        divHtml = divHtml+'</h4>';
+        divHtml = divHtml+defect_list.getLevelSelect(ddid,level);
+        divHtml = divHtml+'<div class="ui-grid-b">';
+        divHtml = divHtml+'<div class="ui-block-a"><a class="xj" data-role="button"><img src="images/icon_camera.png" onclick="defect_list.cameraOnClick('+ddid+',\''+description+'\');" /></a>';
+        divHtml = divHtml+'<img id="defect_img'+ddid+'" src="'+imageURL+'" style="display:'+imgDisplay+';height:70px;width:85px;" onclick="defect_list.showBigImg();"/>';
+        divHtml = divHtml+'</div>';
+        divHtml = divHtml+'<div class="ui-block-b"><a class="xj" data-role="button"><img src="images/icon_camera.png" onclick="defect_list.cameraOnClick('+ddid+',\''+description+'\');" /></a>';
+        divHtml = divHtml+'<img id="defect_img'+ddid+'" src="'+imageURL+'" style="display:'+imgDisplay+';height:70px;width:85px;" onclick="defect_list.showBigImg();"/>';
         divHtml = divHtml+'</div>';
         divHtml = divHtml+'</div>';
         divHtml = divHtml+'</div>';
@@ -159,7 +172,7 @@ var defect_list = {
         }
     },
     getLevelSelect:function(ddid,level){
-        var select = '<div class="qxdy"><select disabled="disabled" onchange="defect_list.dealSelectDefectLevel('+ddid+',this.options[this.options.selectedIndex].value)">';
+        var select = '<div class="qxdy"><select onchange="defect_list.dealSelectDefectLevel('+ddid+',this.options[this.options.selectedIndex].value)">';
         select = select+'<option value=“”>选择缺陷级别</option>';
         for(var i=0;i<levelArray.length;i++){
             if(level == levelArray[i]){

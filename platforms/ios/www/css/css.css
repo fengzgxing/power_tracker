@@ -531,3 +531,41 @@ font-size:12px;
 	margin:3px 0 0 0;
 	right:5%;
 }
+
+
+.ui-block-b .xj{
+	border-radius: 0.6em;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#8ad13d), to(#4e9403));
+	border: 1px solid #4b9000;
+	width: 80px;
+	height: 45px; float: left;display:black;
+	cursor: pointer;
+}
+
+.ui-block-b .xj:hover{background: -webkit-gradient(linear, 0 0, 0 100%, from(#4e9403), to(#8ad13d));}
+
+.ui-block-a .xj:hover{background: -webkit-gradient(linear, 0 0, 0 100%, from(#c40505), to(#dc6b6b));}
+
+.ui-block-b .xj img {
+	position: relative;
+	margin: 0 0 0 0;
+}	
+.ui-block-a .xj {
+	border-radius: 0.6em;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#dc6b6b), to(#c40505));
+	border: 1px solid #c20000;
+	width: 80px;
+	height: 45px;
+	cursor: pointer;display:black;float: left;
+}
+
+.ui-block-a .xj img {
+	position: relative;
+	margin:0 auto;
+}
+.anniu .ui-btn-inner .ui-btn-text {
+	text-shadow: 1px 1px 0 #000;
+}
+.anniu:hover {
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#3a8a02), to(#74cb0e));
+}

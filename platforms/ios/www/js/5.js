@@ -4,6 +4,9 @@ var queryDevicePartSql = "select * from device_part where dpid in ( select disti
 //查询巡视内容
 var queryContentSql = "select * from inspection_content where icid in ( select distinct(icid) from card_content_ref where iiid=? and dpid = ?)";
 
+//保存用户抄录数据
+var insertNewDefectOfUserDefine = 'insert into defect_record(creater,irchunk,ipid,ipname,did,dname,dpid,dpname,result_type,val,unit,drchunk,createtime) values(?,?,?,?,?,?,?,?,?,?,?,?,?)';
+
 
 //查询各个设备部件的缺陷数量
 var _queryDevicePartDefectCountSql = "select dp.name,dp.dpid,dr.irchunk,count(1) as dcount from device_part dp left join defect_record dr on dp.dpid = dr.dpid where dp.dpid in(select dpid from card_content_ref where iiid = ? and did = ?) group by dp.dpid ";
@@ -27,37 +30,81 @@ var devicepartlist_of_device={
                 var __dpname = results.rows.item(i).name;
                 var __dcount  = results.rows.item(i).dcount;
                 var __irchunk = results.rows.item(i).irchunk;
+                var __result_type = results.rows.item(i).result_type;
+                var __unit = results.rows.item(i).unit;
+                var __ceil = results.rows.item(i).ceil;
+                var __floor = results.rows.item(i).floor;
+                var __val = results.rows.item(i).val;
                 
                 if(!__irchunk && __dcount==1){
                     __dcount = 0;
                 }
                 if(__dpname !=temp_dpname){
-//                    if(temp_dpname.length>0){
-//                        innerhtml = innerhtml+'<li data-icon="false">  <a href="#" data-role="button" data-theme="e" onclick="devicepartlist_of_device.findDefectOnClick('+__dpid+',\''+__dpname+'\')">记录缺陷</a> </li>';
-//                    }
                     innerhtml = innerhtml+devicepartlist_of_device.getLiDividerHtml(__dpid,__dpname,__dcount);
                     temp_dpname = __dpname;
                 }
-                innerhtml = innerhtml+devicepartlist_of_device.getLiHtml(__content);
+                innerhtml = innerhtml+devicepartlist_of_device.getLiHtml(__content,__result_type,__unit,__ceil,__floor,__dpid,__dpname);
             }
-            //innerhtml = innerhtml+'<li data-icon="false">  <a href="#" data-role="button" data-theme="e" onclick="devicepartlist_of_device.findDefectOnClick('+__dpid+',\''+__dpname+'\')">记录缺陷</a>  </li>';
             $('#contentlist').html(innerhtml).trigger('create');
             $('#contentlist').listview("refresh");
         }else{
             kmsg('数据库中无详细的设备数据，请在后台配置');
         }
     },
-    getLiHtml:function(content){
-        //return '<li data-theme="c" data-icon="false"><a href="#" data-transition="slide">'+content+'</a> </li>';
-        return '<div class="qx_shuru"><input type="text" size=4 /></div><li data-theme="c" class="lb_bg" data-icon="false"><a href="#" data-transition="slide">'+content+'</a></li>';
+    getLiHtml:function(content,result_type,unit,ceil,floor,dpid,dpname){
+        if(result_type && result_type == 'Y')
+        {
+            return '<div class="qx_shuru"><input type="text" placeholder="'+unit+'" size=4 max="'+ceil+'" min="'+floor+'" onchange="devicepartlist_of_device.userDefineOnchange(this,\''+unit+'\',\''+dpid+'\',\''+dpname+'\')" /></div><li data-theme="c" class="lb_bg" data-icon="false"><a href="#" data-transition="slide">'+content+'</a></li>';
+        }else{
+            return '<div class="qx_shuru"></div><li data-theme="c" class="lb_bg" data-icon="false"><a href="#" data-transition="slide">'+content+'</a></li>';
+        }
     },
     getLiDividerHtml:function(dpid,dpname,dcount){
-        //return '<li data-role="list-divider" role="heading" style="padding:15px;font-size:18px;">'+dpname+'<a href="#" onclick="devicepartlist_of_device.findDefectOnClick('+dpid+',\''+dpname+'\')">记录缺陷</a> <span class="ui-li-count">'+dcount+'</span></li>';
         return '<li data-role="list-divider" role="heading" class="xunshi">'+dpname+'<div class="jl"><a href="#" data-role="button" class="jl_quexian" onclick="devicepartlist_of_device.findDefectOnClick('+dpid+',\''+dpname+'\')">记录缺陷</a></div><span class="ui-li-count jsp">'+dcount+'</span></li>';
     },
     findDefectOnClick:function(dpid,dpname){
         localStorage._dpid = dpid;
         localStorage._dpname = dpname;
         $.mobile.changePage("6.html","slidedown",true,true);
+    },
+    userDefineOnchange:function(input,unit,dpid,dpname){
+        localStorage._dpid = dpid;
+        localStorage._dpname = dpname;
+        var max = new Number($(input).attr("max"));
+        var min = new Number($(input).attr("min"));
+        var val = new Number($(input).val());
+        localStorage._userVal = val;
+        localStorage._userValUnit = unit;
+        if(val>max)
+        {
+            navigator.notification.confirm("您输入的:"+val+",超过上限:"+max+",是否保存?",devicepartlist_of_device.saveUserDefineData,"信息提示",["保存","取消"]);
+        }else if(val<min){
+            navigator.notification.confirm("您输入的:"+val+",低于下限:"+min+",是否保存?",devicepartlist_of_device.saveUserDefineData,"信息提示",["保存","取消"]);
+        }else{
+            devicepartlist_of_device.saveUserDefineData(1);
+        }
+        
+    },
+    saveUserDefineData:function(buttonIndex){
+        // 'insert into defect_record(creater,irchunk,ipid,ipname,did,dname,dpid,dpname,result_type,val,unit,drchunk,createtime)
+        if(buttonIndex==1){
+            var _params = [
+                           localStorage._username,
+                           localStorage._irchunk,
+                           localStorage._iiid,
+                           localStorage._pointname,
+                           localStorage._did,
+                           localStorage._dname,
+                           localStorage._dpid,
+                           localStorage._dpname,
+                           'Y',
+                           localStorage._userVal,
+                           localStorage._userValUnit,
+                           getChunk(),
+                           getFormatDt()
+                        ];
+            executeQuery(insertNewDefectOfUserDefine,_params,function(tx,results){alert(results.insertId);});
+        }
+        
     }
 }
