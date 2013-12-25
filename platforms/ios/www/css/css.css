@@ -486,19 +486,25 @@ font-size:12px;
 .foot .ui-btn{ 
      font-size:18px;
 	 margin:6px 0 0 55%;}
-.jsp{
+
+#contentlist li .jsp{
 	   border-radius:0.5em;
 	   background: -webkit-gradient(linear, 0 0, 0 100%, from(#f85b5b), to(#ca1717));
 	   border:1px solid #000;
 	   color: #FFF;
        text-shadow:none;
-	   
+       width:18px;
+       font-size:18px;
+       text-align:center;
+ margin-top:-18px;
+
 }
+
 .jl{
 	 position:absolute;
 	 width:135px; 
 	 margin:-40px 0 0 90%;
-	 right:5%;
+	 right:8%;
 }
 
 .jl_quexian{

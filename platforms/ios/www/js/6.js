@@ -89,7 +89,9 @@ var defect_list = {
             defect.drchunk = drchunk;
             defectArray.push(defect);
         }
-        var divHtml = '<div data-role="collapsible" data-theme="d" data-collapsed="false" data-content-theme="d"  data-collapsed-icon="false">';
+        var collapse = imgDisplay=='none'?true:false;
+        
+        var divHtml = '<div data-role="collapsible" data-theme="d" data-collapsed="'+collapse+'" data-content-theme="d"  data-collapsed-icon="false">';
         divHtml = divHtml+'<h4>'+description+'</h4>';
         divHtml = divHtml+defect_list.getLevelSelect(ddid,level);
         divHtml = divHtml+'<div class="ui-grid-c" style="height:80px;">';
@@ -157,7 +159,7 @@ var defect_list = {
         }
     },
     getLevelSelect:function(ddid,level){
-        var select = '<div class="qxdy"><select onchange="defect_list.dealSelectDefectLevel('+ddid+',this.options[this.options.selectedIndex].value)">';
+        var select = '<div class="qxdy"><select disabled="disabled" onchange="defect_list.dealSelectDefectLevel('+ddid+',this.options[this.options.selectedIndex].value)">';
         select = select+'<option value=“”>选择缺陷级别</option>';
         for(var i=0;i<levelArray.length;i++){
             if(level == levelArray[i]){
