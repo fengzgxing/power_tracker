@@ -1,12 +1,11 @@
 <!--  巡视点下的设备列表 -->
-<div data-role="page" id="page_inspection_point">
+<div data-role="page" id="page_devicepart">
     <script type="text/javascript">
-        $('#page_inspection_point').bind('pageinit',devicelist_of_point.pageInit);
-        //$("#title").html(localStorage._deptname+'-巡视卡');
+        $('#page_devicepart').bind('pageinit',devicepartlist.pageInit);
     </script>
     <div data-theme="b" data-role="header" data-position="fixed">
         <a data-role="button" href="3.html" data-icon="back">返回</a>
-        <span class="ui-title" id="page_inspection_point_title"></span>
+        <span class="ui-title" id="page_devicepart_title"></span>
     </div>
     <div data-role="content">
         <ol data-role="listview" data-divider-theme="b" data-inset="true" id="devicelist"></ol>
