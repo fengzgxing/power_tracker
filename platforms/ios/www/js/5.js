@@ -5,11 +5,11 @@ var queryDevicePartSql = "select * from device_part where dpid in ( select disti
 var queryContentSql = "select * from inspection_content where icid in ( select distinct(icid) from card_content_ref where iiid=? and dpid = ?)";
 
 //保存用户抄录数据
-var insertNewDefectOfUserDefine = 'insert into defect_record(creater,irchunk,ipid,ipname,did,dname,dpid,dpname,result_type,val,unit,drchunk,createtime) values(?,?,?,?,?,?,?,?,?,?,?,?,?)';
+var insertNewDefectOfUserDefine = "insert into defect_record(creater,irchunk,ipid,ipname,did,dname,dpid,dpname,icid,iccontent,result_type,val,unit,drchunk,createtime,createphoto) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
 //查询各个设备部件的缺陷数量
-var _queryDevicePartDefectCountSql = "select dp.name,dp.dpid,dr.irchunk,count(1) as dcount from device_part dp left join defect_record dr on dp.dpid = dr.dpid where dp.dpid in(select dpid from card_content_ref where iiid = ? and did = ?) group by dp.dpid ";
+var _queryDevicePartDefectCountSql = "select dp.name,dp.dpid,dr.irchunk,count(1) as dcount from device_part dp left join defect_record dr on dp.dpid = dr.dpid where dr.result_type is null and dp.dpid in(select dpid from card_content_ref where iiid = ? and did = ?) group by dp.dpid ";
 var queryInspectionContentSql = "select ic.*,_tmp.* from ("+_queryDevicePartDefectCountSql+") as _tmp left join inspection_content ic on ic.dpid = _tmp.dpid where ic.icid in (select icid from card_content_ref where iiid = ? and did = ?)"
 
 var devicepartlist_of_device={
@@ -34,8 +34,10 @@ var devicepartlist_of_device={
                 var __unit = results.rows.item(i).unit;
                 var __ceil = results.rows.item(i).ceil;
                 var __floor = results.rows.item(i).floor;
-                var __val = results.rows.item(i).val;
-                
+                var __val = localStorage.getItem("_icid"+__icid);
+                if(!__val || __val=='null'){
+                    __val="";
+                }
                 if(!__irchunk && __dcount==1){
                     __dcount = 0;
                 }
@@ -43,7 +45,7 @@ var devicepartlist_of_device={
                     innerhtml = innerhtml+devicepartlist_of_device.getLiDividerHtml(__dpid,__dpname,__dcount);
                     temp_dpname = __dpname;
                 }
-                innerhtml = innerhtml+devicepartlist_of_device.getLiHtml(__content,__result_type,__unit,__ceil,__floor,__dpid,__dpname);
+                innerhtml = innerhtml+devicepartlist_of_device.getLiHtml(__icid,__content,__result_type,__val,__unit,__ceil,__floor,__dpid,__dpname);
             }
             $('#contentlist').html(innerhtml).trigger('create');
             $('#contentlist').listview("refresh");
@@ -51,10 +53,10 @@ var devicepartlist_of_device={
             kmsg('数据库中无详细的设备数据，请在后台配置');
         }
     },
-    getLiHtml:function(content,result_type,unit,ceil,floor,dpid,dpname){
+    getLiHtml:function(icid,content,result_type,val,unit,ceil,floor,dpid,dpname){
         if(result_type && result_type == 'Y')
         {
-            return '<div class="qx_shuru"><input type="text" placeholder="'+unit+'" size=4 max="'+ceil+'" min="'+floor+'" onchange="devicepartlist_of_device.userDefineOnchange(this,\''+unit+'\',\''+dpid+'\',\''+dpname+'\')" /></div><li data-theme="c" class="lb_bg" data-icon="false"><a href="#" data-transition="slide">'+content+'</a></li>';
+            return '<div class="qx_shuru"><input type="text" value="'+val+'" placeholder="'+unit+'" size=4 max="'+ceil+'" min="'+floor+'" onchange="devicepartlist_of_device.userDefineOnchange(this,\''+icid+'\',\''+content+'\',\''+unit+'\',\''+dpid+'\',\''+dpname+'\')" /></div><li data-theme="c" class="lb_bg" data-icon="false"><a href="#" data-transition="slide">'+content+'</a></li>';
         }else{
             return '<div class="qx_shuru"></div><li data-theme="c" class="lb_bg" data-icon="false"><a href="#" data-transition="slide">'+content+'</a></li>';
         }
@@ -67,7 +69,9 @@ var devicepartlist_of_device={
         localStorage._dpname = dpname;
         $.mobile.changePage("6.html","slidedown",true,true);
     },
-    userDefineOnchange:function(input,unit,dpid,dpname){
+    userDefineOnchange:function(input,icid,content,unit,dpid,dpname){
+        localStorage._icid = icid;
+        localStorage._content = content;
         localStorage._dpid = dpid;
         localStorage._dpname = dpname;
         var max = new Number($(input).attr("max"));
@@ -86,7 +90,6 @@ var devicepartlist_of_device={
         
     },
     saveUserDefineData:function(buttonIndex){
-        // 'insert into defect_record(creater,irchunk,ipid,ipname,did,dname,dpid,dpname,result_type,val,unit,drchunk,createtime)
         if(buttonIndex==1){
             var _params = [
                            localStorage._username,
@@ -97,13 +100,19 @@ var devicepartlist_of_device={
                            localStorage._dname,
                            localStorage._dpid,
                            localStorage._dpname,
+                           localStorage._icid,
+                           localStorage._content,
                            'Y',
                            localStorage._userVal,
                            localStorage._userValUnit,
                            getChunk(),
-                           getFormatDt()
+                           getFormatDt(),
+                           _fileSystem.root.toURL()+'/blank.gif'
                         ];
-            executeQuery(insertNewDefectOfUserDefine,_params,function(tx,results){alert(results.insertId);});
+            
+            localStorage.setItem("_icid"+localStorage._icid,localStorage._userVal);
+            
+            executeQuery(insertNewDefectOfUserDefine,_params,function(tx,results){console.log('数据保存成功');});
         }
         
     }

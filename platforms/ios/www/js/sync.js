@@ -1,5 +1,5 @@
 //服务器端同步地址
-var server_url = "http://192.168.0.211:8080/qinju";
+var server_url = "http://app.cnksi.com.cn/qj";
 
 var syncUploadSql ="select dr.*,ir.* from defect_record dr left join inspection_report ir on ir.irchunk = dr.irchunk ";
 
@@ -28,11 +28,20 @@ var sync = {
         var lens = results.rows.length;
         for(var i=0;i<lens;i++){
             var rowdata = results.rows.item(i);
-            if(rowdata.createphoto && rowdata.createphoto.length>6 && rowdata.createphoto.indexOf("/")>-1){
-                var record = {};
-                record.imageURI = rowdata.createphoto;
-                record.options = getFileUploadOption(rowdata);
-                needUpload.push(record);
+            if(rowdata.state && rowdata.state=='find'){
+                if(rowdata.dealphoto && rowdata.dealphoto.length>6 && rowdata.dealphoto.indexOf("/")>-1){
+                    var record = {};
+                    record.imageURI = rowdata.dealphoto;
+                    record.options = getFileUploadOption(rowdata);
+                    needUpload.push(record);
+                }
+            }else{
+                if(rowdata.createphoto && rowdata.createphoto.length>6 && rowdata.createphoto.indexOf("/")>-1){
+                    var record = {};
+                    record.imageURI = rowdata.createphoto;
+                    record.options = getFileUploadOption(rowdata);
+                    needUpload.push(record);
+                }
             }
         }
         if(needUpload.length>0){
@@ -182,6 +191,7 @@ function getFileUploadOption(rowdata){
         'report.cname':rowdata.cname,
         'report.status':rowdata.status,
         'report.irchunk':rowdata.irchunk,
+        
         'defect.irchunk':rowdata.irchunk,
         'defect.ipid':rowdata.ipid,
         'defect.ipname':rowdata.ipname,
@@ -198,9 +208,12 @@ function getFileUploadOption(rowdata){
         'defect.creater':rowdata.creater,
         'defect.createphoto':options.fileName,
         'defect.ddid':rowdata.ddid,
+        'defect.dealphoto':rowdata.dealphoto,
+        'defect.dealer':rowdata.dealer,
+        'defect.dealtime':rowdata.dealtime,
         'defect.drchunk':rowdata.drchunk
     };
-    console.log(params);
+    
     options.params = params;
     return options;
 }

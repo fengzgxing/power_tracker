@@ -404,13 +404,29 @@ font-size:12px;
 	liner-height:30px;
 	line-height:25px;
 	color:#000;}
+.footer_next{
+	float:right;
+	right:5%;
+	margin:10px 0 0 0;
+	width:auto;
+	liner-height:30px;
+	line-height:25px;
+	color:#FFF;}
+.footer_over{background: -webkit-gradient(linear, 0 0, 0 100%, from(#c1e0fb), to(#8ec1f2)); 
+	text-shadow:1px 1px 1px #fff;
+	float:right;
+	right:40%;
+	margin:10px 0 0 0;
+	width:150px;
+	liner-height:30px;
+	line-height:25px;
+	color:#000;}
 .footer_anniu:hover{background: -webkit-gradient(linear, 0 0, 0 100%, from(#8ec1f2), to(#c1e0fb));}
 .foot{ 
       height:57px;
 	  border-top:2px solid #161719
 	  }
-
-.foot .ui-btn{ 
+.foot .ui-btn{
      font-size:18px;
 	 margin:6px 0 0 0;}
 	 
@@ -470,22 +486,16 @@ font-size:12px;
 .xunshi .ui-btn-inner:hover {
 	text-shadow: none;
 }
-.footer_wcxj{ 
+.foot .footer_wcxj{ 
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffdb4f), to(#ffbd1c)); 
 	text-shadow:1px 1px 1px #fff;
-	right:10%;
-	margin:10px 0 0 0;
+
+	margin:10px auto 0 auto;
 	width:150px;
 	liner-height:30px;
 	color:#000;}
 .footer_wcxj:hover{background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffbd1c), to(#ffdb4f));}
-.foot{ 
-      height:57px;
-	  border-top:2px solid #161719
-	  }
-.foot .ui-btn{ 
-     font-size:18px;
-	 margin:6px 0 0 55%;}
+
 
 #contentlist li .jsp{
 	   border-radius:0.5em;
@@ -569,3 +579,4 @@ font-size:12px;
 .anniu:hover {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#3a8a02), to(#74cb0e));
 }
+.foot .map{ width:70px;height:45px; background:none; left:3%;}
